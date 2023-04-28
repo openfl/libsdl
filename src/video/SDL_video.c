@@ -1438,6 +1438,14 @@ static Uint32 SDL_DefaultGraphicsBackends(SDL_VideoDevice *_this)
     return 0;
 }
 
+static int SDL_ContextNotSupported(const char *name)
+{
+    return SDL_SetError("%s support is either not configured in SDL "
+                        "or not available in current SDL video driver "
+                        "(%s) or platform",
+                        name,
+                        _this->name);
+}
 
 SDL_Window *
 SDL_CreateWindow(const char *title, int x, int y, int w, int h, Uint32 flags)
@@ -1618,15 +1626,6 @@ SDL_CreateWindow(const char *title, int x, int y, int w, int h, Uint32 flags)
     SDL_UpdateFullscreenMode(window, FULLSCREEN_VISIBLE(window));
 
     return window;
-}
-
-static int SDL_ContextNotSupported(const char *name)
-{
-    return SDL_SetError("%s support is either not configured in SDL "
-                        "or not available in current SDL video driver "
-                        "(%s) or platform",
-                        name,
-                        _this->name);
 }
 
 SDL_Window *
