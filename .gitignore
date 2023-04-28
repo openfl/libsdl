@@ -1,1 +1,4 @@
 .DS_Store
+.idea/libsdl.iml
+.idea/modules.xml
+.idea/vcs.xml
