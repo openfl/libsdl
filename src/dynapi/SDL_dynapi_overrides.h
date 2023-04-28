@@ -726,6 +726,7 @@
 #define SDL_LoadFile SDL_LoadFile_REAL
 #define SDL_Metal_CreateView SDL_Metal_CreateView_REAL
 #define SDL_Metal_DestroyView SDL_Metal_DestroyView_REAL
+#define SDL_Metal_GetLayer SDL_Metal_GetLayer_REAL
 #define SDL_LockTextureToSurface SDL_LockTextureToSurface_REAL
 #define SDL_HasARMSIMD SDL_HasARMSIMD_REAL
 #define SDL_strtokr SDL_strtokr_REAL
