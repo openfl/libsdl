@@ -1443,6 +1443,7 @@ SDL_Window *
 SDL_CreateWindow(const char *title, int x, int y, int w, int h, Uint32 flags)
 {
     SDL_Window *window;
+    Uint32 type_flags, graphics_flags;
 
     if (!_this) {
         /* Initialize the video system if needed */
@@ -1452,6 +1453,13 @@ SDL_CreateWindow(const char *title, int x, int y, int w, int h, Uint32 flags)
     }
 
     if ((((flags & SDL_WINDOW_UTILITY) != 0) + ((flags & SDL_WINDOW_TOOLTIP) != 0) + ((flags & SDL_WINDOW_POPUP_MENU) != 0)) > 1) {
+        SDL_SetError("Conflicting window flags specified");
+        return NULL;
+    }
+
+    /* ensure no more than one of these flags is set */
+    type_flags = flags & (SDL_WINDOW_UTILITY | SDL_WINDOW_TOOLTIP | SDL_WINDOW_POPUP_MENU);
+    if (type_flags & (type_flags - 1)) {
         SDL_SetError("Conflicting window flags specified");
         return NULL;
     }
@@ -1610,6 +1618,15 @@ SDL_CreateWindow(const char *title, int x, int y, int w, int h, Uint32 flags)
     SDL_UpdateFullscreenMode(window, FULLSCREEN_VISIBLE(window));
 
     return window;
+}
+
+static int SDL_ContextNotSupported(const char *name)
+{
+    return SDL_SetError("%s support is either not configured in SDL "
+                        "or not available in current SDL video driver "
+                        "(%s) or platform",
+                        name,
+                        _this->name);
 }
 
 SDL_Window *
