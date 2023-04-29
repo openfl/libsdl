@@ -4305,15 +4305,4 @@ SDL_Metal_GetLayer(SDL_MetalView view)
     }
 }
 
-void SDL_Metal_GetDrawableSize(SDL_Window *window, int *w, int *h)
-{
-    CHECK_WINDOW_MAGIC(window, );
-
-    if (_this->Metal_GetDrawableSize) {
-        _this->Metal_GetDrawableSize(_this, window, w, h);
-    } else {
-        SDL_GetWindowSizeInPixels(window, w, h);
-    }
-}
-
 /* vi: set ts=4 sw=4 expandtab: */

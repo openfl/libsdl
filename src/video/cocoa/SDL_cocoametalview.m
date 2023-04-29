@@ -177,6 +177,15 @@ Cocoa_Metal_GetDrawableSize(SDL_Window * window, int * w, int * h)
     }
 }}
 
+void *
+Cocoa_Metal_GetLayer(_THIS, SDL_MetalView view)
+{
+    @autoreleasepool {
+        SDL_cocoametalview *cocoaview = (__bridge SDL_cocoametalview *)view;
+        return (__bridge void *)cocoaview.layer;
+    }
+}
+
 #endif /* SDL_VIDEO_DRIVER_COCOA && (SDL_VIDEO_VULKAN || SDL_VIDEO_METAL) */
 
 /* vi: set ts=4 sw=4 expandtab: */

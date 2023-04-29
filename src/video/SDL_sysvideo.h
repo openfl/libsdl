@@ -281,6 +281,7 @@ struct SDL_VideoDevice
      */
     SDL_MetalView (*Metal_CreateView) (_THIS, SDL_Window * window);
     void (*Metal_DestroyView) (_THIS, SDL_MetalView view);
+    void *(*Metal_GetLayer)(_THIS, SDL_MetalView view);
 
     /* * * */
     /*
