@@ -370,7 +370,11 @@ IME_Init(SDL_VideoData *videodata, HWND hwnd)
     videodata->ime_available = SDL_TRUE;
     IME_UpdateInputLocale(videodata);
     IME_SetupAPI(videodata);
+#if defined(__WIN32__)
+    videodata->ime_uiless = SDL_FALSE;
+#else
     videodata->ime_uiless = UILess_SetupSinks(videodata);
+#endif
     IME_UpdateInputLocale(videodata);
     IME_Disable(videodata, hwnd);
 }
